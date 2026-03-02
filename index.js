@@ -16,7 +16,7 @@ import {
 const app = new Hono();
 
 // API Registrasi
-app.post("api/register", register);
+app.post("/api/register", register);
 
 // API LOGIN
 app.post("/api/login", login);
