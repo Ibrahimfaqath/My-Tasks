@@ -3,146 +3,286 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Registrasi</title>
+    <title>Create Account — My Tasks</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <style>
-      * {
+      :root {
+        --bg: #0a0a0a;
+        --surface: #111111;
+        --surface-2: #1a1a1a;
+        --border: #2a2a2a;
+        --text: #ededed;
+        --text-muted: #888;
+        --accent: #5865f2;
+        --accent-hover: #4752c4;
+        --danger: #ef4444;
+        --success: #22c55e;
+        --radius: 10px;
+      }
+
+      *, *::before, *::after {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       }
 
       body {
-        background-color: #f5f7fa;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        font-family: 'Inter', sans-serif;
+        background-color: var(--bg);
+        color: var(--text);
         min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         padding: 20px;
       }
 
-      .container {
-        background-color: white;
-        border-radius: 10px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      .auth-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
         padding: 40px;
         width: 100%;
         max-width: 400px;
       }
 
+      .auth-logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 32px;
+      }
+
+      .auth-logo-icon {
+        width: 32px;
+        height: 32px;
+        background: var(--accent);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .auth-logo-icon svg {
+        width: 18px;
+        height: 18px;
+        stroke: white;
+        fill: none;
+        stroke-width: 2.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .auth-logo-text {
+        font-size: 18px;
+        font-weight: 700;
+        letter-spacing: -0.3px;
+      }
+
       h1 {
-        color: #2c3e50;
-        text-align: center;
-        margin-bottom: 30px;
-        font-weight: 600;
+        font-size: 22px;
+        font-weight: 700;
+        letter-spacing: -0.4px;
+        margin-bottom: 6px;
       }
 
-      #message {
-        padding: 10px;
-        border-radius: 5px;
-        margin-bottom: 20px;
-        text-align: center;
+      .auth-subtitle {
         font-size: 14px;
+        color: var(--text-muted);
+        margin-bottom: 28px;
+        line-height: 1.5;
       }
 
-      #registrationForm {
+      .form-group {
         display: flex;
         flex-direction: column;
-        gap: 20px;
+        gap: 6px;
+        margin-bottom: 16px;
+      }
+
+      label {
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--text-muted);
       }
 
       input {
-        padding: 12px 15px;
-        border: 1px solid #e1e5eb;
-        border-radius: 5px;
-        font-size: 16px;
-        transition: all 0.3s;
+        background: var(--surface-2);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        color: var(--text);
+        font-family: 'Inter', sans-serif;
+        font-size: 14px;
+        padding: 11px 14px;
+        transition: border-color 0.15s, box-shadow 0.15s;
+        width: 100%;
       }
 
       input:focus {
         outline: none;
-        border-color: #3498db;
-        box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px rgba(88, 101, 242, 0.15);
       }
 
-      button {
-        background-color: #3498db;
-        color: white;
+      input::placeholder {
+        color: #555;
+      }
+
+      .submit-btn {
+        background: var(--accent);
         border: none;
-        border-radius: 5px;
-        padding: 12px;
-        font-size: 16px;
+        border-radius: var(--radius);
+        color: white;
         cursor: pointer;
-        transition: background-color 0.3s;
+        font-family: 'Inter', sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        padding: 12px;
+        transition: background 0.15s, transform 0.1s;
+        width: 100%;
+        margin-top: 8px;
       }
 
-      button:hover {
-        background-color: #2980b9;
+      .submit-btn:hover {
+        background: var(--accent-hover);
       }
 
-      p {
+      .submit-btn:active {
+        transform: scale(0.99);
+      }
+
+      .submit-btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      #message {
+        font-size: 13px;
+        padding: 10px 14px;
+        border-radius: var(--radius);
+        margin-bottom: 18px;
+        display: none;
+      }
+
+      #message.error {
+        display: block;
+        background: rgba(239, 68, 68, 0.1);
+        border: 1px solid rgba(239, 68, 68, 0.3);
+        color: #fca5a5;
+      }
+
+      #message.success {
+        display: block;
+        background: rgba(34, 197, 94, 0.1);
+        border: 1px solid rgba(34, 197, 94, 0.3);
+        color: #86efac;
+      }
+
+      #message.success a {
+        color: #86efac;
+        font-weight: 600;
+      }
+
+      .auth-footer {
         text-align: center;
-        margin-top: 20px;
-        color: #7f8c8d;
+        margin-top: 24px;
+        font-size: 14px;
+        color: var(--text-muted);
       }
 
-      a {
-        color: #3498db;
+      .auth-footer a {
+        color: var(--accent);
         text-decoration: none;
-        transition: color 0.3s;
+        font-weight: 500;
       }
 
-      a:hover {
-        color: #2980b9;
+      .auth-footer a:hover {
         text-decoration: underline;
+      }
+
+      .divider {
+        height: 1px;
+        background: var(--border);
+        margin: 24px 0;
       }
     </style>
   </head>
-
   <body>
-    <div class="container">
-      <h1>Registrasi Akun Baru</h1>
+    <div class="auth-card">
+      <div class="auth-logo">
+        <div class="auth-logo-icon">
+          <svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        </div>
+        <span class="auth-logo-text">My Tasks</span>
+      </div>
+
+      <h1>Create an account</h1>
+      <p class="auth-subtitle">Get started for free. No credit card required.</p>
+
       <div id="message"></div>
+
       <form id="registrationForm">
-        <input type="text" id="username" placeholder="Username" required />
-        <input type="password" id="password" placeholder="Password" required />
-        <button type="submit">Daftar</button>
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" placeholder="Choose a username" required autocomplete="username" />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Create a password" required autocomplete="new-password" />
+        </div>
+        <button type="submit" class="submit-btn" id="submitBtn">Create account</button>
       </form>
-      <p>Sudah punya akun? <a href="/login/">Login di sini</a></p>
+
+      <div class="divider"></div>
+
+      <div class="auth-footer">
+        Already have an account? <a href="/login/">Sign in</a>
+      </div>
     </div>
 
     <script>
-      const form = document.getElementById("registrationForm");
-      const messageDiv = document.getElementById("message");
+      const form = document.getElementById('registrationForm');
+      const messageDiv = document.getElementById('message');
+      const submitBtn = document.getElementById('submitBtn');
 
-      form.addEventListener("submit", async (e) => {
+      form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const username = document.getElementById("username").value;
-        const password = document.getElementById("password").value;
-        messageDiv.textContent = "";
-        messageDiv.style.color = "#e74c3c";
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        messageDiv.className = '';
+        messageDiv.textContent = '';
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Creating account...';
 
         try {
-          const response = await fetch("/api/register", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
+          const response = await fetch('/api/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, password }),
           });
-
-          console.log("Response status:", response.status); // <-- Cek status
 
           const result = await response.json();
 
           if (result.success) {
-            messageDiv.style.color = "#27ae60";
-            messageDiv.innerHTML =
-              'Registrasi berhasil! Silakan <a href="/login/">login</a>.';
+            messageDiv.innerHTML = 'Account created! <a href="/login/">Sign in now</a>.';
+            messageDiv.className = 'success';
             form.reset();
+            submitBtn.textContent = 'Create account';
+            submitBtn.disabled = false;
           } else {
-            messageDiv.textContent = result.message || "Registrasi gagal!";
+            messageDiv.textContent = result.message || 'Registration failed. Please try again.';
+            messageDiv.className = 'error';
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Create account';
           }
         } catch (error) {
-          messageDiv.textContent = "Terjadi kesalahan. Silakan coba lagi.";
+          messageDiv.textContent = 'Something went wrong. Please try again.';
+          messageDiv.className = 'error';
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Create account';
         }
       });
     </script>
