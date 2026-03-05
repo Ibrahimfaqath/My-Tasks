@@ -16,5 +16,12 @@
       "tag": "0001_fluffy_reavers",
       "breakpoints": true
     }
+    ,{
+      "idx": 2,
+      "version": "7",
+      "when": 1760586000000,
+      "tag": "0002_add_priority",
+      "breakpoints": true
+    }
   ]
 }

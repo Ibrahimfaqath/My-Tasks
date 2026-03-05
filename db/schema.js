@@ -15,4 +15,5 @@ export const todos = pgTable("todos", {
     .references(() => users.id)
     .notNull(),
   status: varchar("status", { length: 50 }).default("pending").notNull(),
+  priority: varchar("priority", { length: 20 }).default("none").notNull(),
 });

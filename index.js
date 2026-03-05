@@ -10,7 +10,8 @@ import { register, login, logout, getMe } from "./controllers/authController.js"
 import { 
   createTodo, 
   getAllTodos, 
-  updateTodoStatus, 
+  updateTodoStatus,
+  updateTodoNote,
   deleteTodo 
 } from "./controllers/todoController.js";
 
@@ -24,6 +25,7 @@ app.get("/api/me", getMe);
 app.post("/api/todos", createTodo);
 app.get("/api/todos", getAllTodos);
 app.put("/api/todos/:id/status", updateTodoStatus);
+app.put("/api/todos/:id/note", updateTodoNote);
 app.delete("/api/todos/:id", deleteTodo);
 
 // --- STATIC FILES ---

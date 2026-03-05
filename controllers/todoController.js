@@ -17,16 +17,16 @@ const verifyTokenFromCookie = (c) => {
   }
 };
 
-// API Menambah Todo - TIDAK BERUBAH
+// API Menambah Todo
 export const createTodo = async (c) => {
   const token = getCookie(c, "token");
   if (!token) return c.json({ success: false, message: "Unauthorized" }, 401);
   try {
     const user = jwt.verify(token, process.env.JWT_SECRET);
-    const { note } = await c.req.json();
+    const { note, priority = "none" } = await c.req.json();
     const newTodo = await db
       .insert(todos)
-      .values({ note, userId: user.id })
+      .values({ note, userId: user.id, priority })
       .returning();
     return c.json({ success: true, data: newTodo[0] }, 201);
   } catch (error) {
@@ -70,6 +70,34 @@ export const updateTodoStatus = async (c) => {
     return c.json({ success: true, data: updatedTodo[0] });
   } catch (error) {
     return c.json({ success: "false", message: "Unauthorized" }, 401);
+  }
+};
+
+// API Edit Todo Note (inline editing)
+export const updateTodoNote = async (c) => {
+  const token = getCookie(c, "token");
+  if (!token) return c.json({ success: false, message: "Unauthorized" }, 401);
+
+  try {
+    const user = jwt.verify(token, process.env.JWT_SECRET);
+    const id = parseInt(c.req.param("id"));
+    const { note } = await c.req.json();
+
+    if (!note || !note.trim()) {
+      return c.json({ success: false, message: "Note cannot be empty" }, 400);
+    }
+
+    const updatedTodo = await db
+      .update(todos)
+      .set({ note: note.trim() })
+      .where(and(eq(todos.id, id), eq(todos.userId, user.id)))
+      .returning();
+
+    if (updatedTodo.length === 0)
+      return c.json({ success: false, message: "Todo not found" }, 404);
+    return c.json({ success: true, data: updatedTodo[0] });
+  } catch (error) {
+    return c.json({ success: false, message: "Unauthorized" }, 401);
   }
 };
 
