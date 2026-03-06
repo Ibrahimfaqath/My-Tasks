@@ -15,12 +15,19 @@
       "when": 1760499897820,
       "tag": "0001_fluffy_reavers",
       "breakpoints": true
-    }
-    ,{
+    },
+    {
       "idx": 2,
       "version": "7",
       "when": 1760586000000,
       "tag": "0002_add_priority",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1772777627454,
+      "tag": "0003_colossal_speed_demon",
       "breakpoints": true
     }
   ]
