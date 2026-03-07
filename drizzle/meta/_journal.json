@@ -5,29 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1759989670141,
-      "tag": "0000_windy_maverick",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1760499897820,
-      "tag": "0001_fluffy_reavers",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1760586000000,
-      "tag": "0002_add_priority",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "7",
-      "when": 1772777627454,
-      "tag": "0003_colossal_speed_demon",
+      "when": 1772780568167,
+      "tag": "0000_jittery_gideon",
       "breakpoints": true
     }
   ]

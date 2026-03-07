@@ -1,1 +1,0 @@
-ALTER TABLE "todos" ADD COLUMN "priority" varchar(20) DEFAULT 'none' NOT NULL;

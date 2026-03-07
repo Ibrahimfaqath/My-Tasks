@@ -1,7 +1,9 @@
 CREATE TABLE "todos" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"note" text NOT NULL,
-	"user_id" integer NOT NULL
+	"user_id" integer NOT NULL,
+	"status" varchar(50) DEFAULT 'pending' NOT NULL,
+	"priority" varchar(20) DEFAULT 'none' NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE "user" (

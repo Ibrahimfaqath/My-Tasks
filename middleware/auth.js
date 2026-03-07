@@ -1,14 +1,19 @@
-// middleware/auth.js
 import jwt from "jsonwebtoken";
 import { getCookie } from "hono/cookie";
 
 export const verifyToken = (c) => {
   const token = getCookie(c, "token");
-  if (!token) return null;
+  
+  if (!token) {
+    console.log("VerifyToken: No token found in cookies");
+    return null;
+  }
   
   try {
-    return jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    return decoded;
   } catch (error) {
+    console.error("VerifyToken: JWT Error", error.message);
     return null;
   }
 };
